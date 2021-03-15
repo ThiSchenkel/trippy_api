@@ -2,13 +2,18 @@ const mongoose = require('mongoose');
 const express = require("express")
 const app = express();
 const port = 8000;
-
-// const restaurantModel = require("./models/restaurants");
-const hotelModel = require("./models/hotels");
-const { request } = require('express');
-
 mongoose.connect("mongodb://localhost:27017/trippy_api", { useNewUrlParser: true, useUnifiedTopology: true }, () => {
     console.log("BD trippy_api connecté");
+
+    const restaurantModel = require("./models/restaurants");
+    const hotelModel = require("./models/hotels");
+    const { request } = require('express');
+    const bodyParser = require('body-parser');
+
+    app.use(bodyParser.urlencoded({ extendes: false }));
+    app.use(bodyParser.json());
+
+
 });
 
 app.listen(port, () => {
@@ -40,15 +45,26 @@ app.post('/hotels', (req, res) => {
         .catch(error => res.status(400).json({ error }));
 });
 
-// Ajouter la possiblité de mettre à jour le nom d’un hôtel (PUT /hotels/:id?name=newName) 
+
+// Ajouter la possiblité de mettre à jour le nom d’un hôtel (PUT /hotels/:id?name=newName) ==> A REVOIR
 app.put('/hotels/:id?name=newName', (req, res) => {
     const hotel = new hotelModel({
         ...req.body
     });
-    hotel.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id, name: req.params.name })
+    hotel.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
         .then(() => res.status(200).json({ message: 'Nom Hotel modifié!' }))
         .catch(error => res.status(400).json({ error }));
 });
+
+// Ajouter la possiblité d’effacer un hôtel (`DELETE /hotels/:id`)
+// app.delete('/hotels/:id', (req, res) => {
+//     const hotel = await hotelModel.deleteOne({ _id: req.params.id })
+
+//     res.json(hotel);
+
+// })
+
+
 
 
 
