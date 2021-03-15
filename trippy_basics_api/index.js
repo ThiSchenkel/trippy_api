@@ -40,21 +40,13 @@ app.post('/hotels', (req, res) => {
         .catch(error => res.status(400).json({ error }));
 });
 
-// Ajouter la possiblité de mettre à jour le nom d’un hôtel (PUT /hotels/:id?name=newName) ==> A REVOIR
-app.put('/hotels/:id', async (req, res) => {
+// Ajouter la possiblité de mettre à jour le nom d’un hôtel (PUT /hotels/:id?name=newName)
+app.put('/hotels/:id', (req, res) => {
     console.log(req.query)
-    await hotelsModel.updateOne({ _id: req.params.id }, { name: req.query.name });
-    console.log("hotel pas kaPUT", req.query.name)
-})
-
-// app.put('/hotels/:id?name=newName', (req, res) => {
-//     const hotel = new hotelModel({
-//         ...req.body
-//     });
-//     hotel.updateOne({ name: req.query.id.name }, { ...req.body, name: req.query.id.name })
-//         .then(() => res.status(200).json({ message: 'Nom Hotel modifié!' }))
-//         .catch(error => res.status(400).json({ error }));
-// });
+    const hotel = hotelModel.updateOne({ _id: req.params.id }, { name: req.query.name })
+        .then(() => res.status(200).json({ message: 'Nom Hotel modifié!' }))
+        .catch(error => res.status(400).json({ error }));
+});
 
 // Ajouter la possiblité d’effacer un hôtel (`DELETE /hotels/:id`)
 app.delete("/hotels/:id", async (req, res) => {
@@ -80,12 +72,17 @@ app.post('/restaurants', (req, res) => {
         ...req.body
     });
     restaurant.save()
-        .then(() => res.status(201).json({ message: 'Nouvel restaurant enregistré!' }))
+        .then(() => res.status(201).json({ message: 'Nouveau restaurant enregistré!' }))
         .catch(error => res.status(400).json({ error }));
 });
 
 // Ajouter la possiblité de mettre à jour le nom d’un restaurant (`PUT /restaurants?name=newName`)
-
+app.put('/restaurants/:id', (req, res) => {
+    console.log(req.query)
+    const restaurant = restaurantModel.updateOne({ _id: req.params.id }, { name: req.query.name })
+        .then(() => res.status(200).json({ message: 'Nom Restaurant modifié!' }))
+        .catch(error => res.status(400).json({ error }));
+});
 
 
 
