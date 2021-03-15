@@ -37,9 +37,9 @@ const createHotel = async () => {
 createHotel();
 
 const createRestaurant = async () => {
-    try {
-        await restaurantModel.deleteMany({})
-        await restaurantModel.create([{
+    await restaurantModel.deleteMany({})
+    await restaurantModel.create([
+        {
             name: "Bouya's Restaurant",
             address: "95 Bis boulevard richard lenoir",
             city: "Paris",
@@ -47,7 +47,8 @@ const createRestaurant = async () => {
             stars: 5,
             cuisine: "Arabe",
             priceCategory: 3
-        }, {
+        },
+        {
             name: "Le ThiNem",
             address: "26 rue du Mékong",
             city: "Paris",
@@ -58,9 +59,6 @@ const createRestaurant = async () => {
         }]).then((response) => {
             console.log(response);
         })
-    } catch (error) {
-        console.log(error)
-    }
 }
 createRestaurant();
 //
