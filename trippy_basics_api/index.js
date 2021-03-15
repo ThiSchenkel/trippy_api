@@ -14,10 +14,10 @@ mongoose.connect("mongodb://localhost:27017/trippy_api", { useNewUrlParser: true
 app.listen(port, () => {
     console.log("Server trippy_api ok")
 })
+
 app.get('/restaurants', (req, res) => {
     res.send("bouya les restaurants")
 })
-
 
 //Créer la route /hotels qui retournera tous les hôtels (GET /hotels)
 app.get("/hotels", async (req, res) => {
@@ -36,7 +36,19 @@ app.post('/hotels', (req, res) => {
         ...req.body
     });
     hotel.save()
-        .then(() => res.status(201).json({ message: 'Hotel enregistré!' }))
+        .then(() => res.status(201).json({ message: 'Nouvel Hotel enregistré!' }))
         .catch(error => res.status(400).json({ error }));
-})
+});
+
+// Ajouter la possiblité de mettre à jour le nom d’un hôtel (PUT /hotels/:id?name=newName) 
+app.put('/hotels/:id?name=newName', (req, res) => {
+    const hotel = new hotelModel({
+        ...req.body
+    });
+    hotel.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id, name: req.params.name })
+        .then(() => res.status(200).json({ message: 'Nom Hotel modifié!' }))
+        .catch(error => res.status(400).json({ error }));
+});
+
+
 
