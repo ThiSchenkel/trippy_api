@@ -17,6 +17,8 @@ app.listen(port, () => {
     console.log("Server trippy_api ok")
 })
 
+
+// --------------------HOTELS----------------------------
 //Créer la route /hotels qui retournera tous les hôtels (GET /hotels)
 app.get("/hotels", async (req, res) => {
     const hotels = await hotelModel.find(); res.json(hotels);
@@ -39,14 +41,20 @@ app.post('/hotels', (req, res) => {
 });
 
 // Ajouter la possiblité de mettre à jour le nom d’un hôtel (PUT /hotels/:id?name=newName) ==> A REVOIR
-app.put('/hotels/:id?name=newName', (req, res) => {
-    const hotel = new hotelModel({
-        ...req.body
-    });
-    hotel.updateOne({ _id: req.query.id }, { ...req.body, _id: req.query.name })
-        .then(() => res.status(200).json({ message: 'Nom Hotel modifié!' }))
-        .catch(error => res.status(400).json({ error }));
-});
+app.put('/hotels/:id', async (req, res) => {
+    console.log(req.query)
+    await hotelsModel.updateOne({ _id: req.params.id }, { name: req.query.name });
+    console.log("hotel pas kaPUT", req.query.name)
+})
+
+// app.put('/hotels/:id?name=newName', (req, res) => {
+//     const hotel = new hotelModel({
+//         ...req.body
+//     });
+//     hotel.updateOne({ name: req.query.id.name }, { ...req.body, name: req.query.id.name })
+//         .then(() => res.status(200).json({ message: 'Nom Hotel modifié!' }))
+//         .catch(error => res.status(400).json({ error }));
+// });
 
 // Ajouter la possiblité d’effacer un hôtel (`DELETE /hotels/:id`)
 app.delete("/hotels/:id", async (req, res) => {
@@ -55,9 +63,7 @@ app.delete("/hotels/:id", async (req, res) => {
 });
 
 
-
-
-
+// --------------------RESTAURANTS----------------------------
 //Créer la route `/restaurants` qui retournera tous les restaurants (`GET /restaurants`)
 app.get('/restaurants', async (req, res) => {
     const restaurant = await restaurantModel.find(); res.json(restaurant);
@@ -88,6 +94,9 @@ app.delete("/restaurants/:id", async (req, res) => {
     await restaurantModel.deleteOne({ _id: req.params.id });
     res.send(`restaurant kaput`);
 });
+
+
+
 
 
 
