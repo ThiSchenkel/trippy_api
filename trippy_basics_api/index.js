@@ -84,12 +84,20 @@ app.put('/restaurants/:id', (req, res) => {
         .catch(error => res.status(400).json({ error }));
 });
 
-
-
 // Ajouter la possiblité d’effacer un restaurant (`DELETE /restaurants/:id`)
 app.delete("/restaurants/:id", async (req, res) => {
     await restaurantModel.deleteOne({ _id: req.params.id });
     res.send(`restaurant kaput`);
+});
+
+
+
+// ajoute le paramètre /hotels?limit=3, faites en sorte que le résultat ne retourne que 3 hotels
+app.get('/hotels', (req, res) => {
+    console.log(req.query)
+    const hotel = hotelModel.find().limit(3)
+        .then(() => res.status(200).json({ message: '3 hotels trouvés!' }))
+        .catch(error => res.status(400).json({ error }));
 });
 
 

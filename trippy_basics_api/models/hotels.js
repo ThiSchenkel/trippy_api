@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const hotelSchema = new mongoose.Schema({
     name: String,
-    adress: String,
+    address: String,
     city: String,
     stars: Number,
     hasSpa: Boolean,

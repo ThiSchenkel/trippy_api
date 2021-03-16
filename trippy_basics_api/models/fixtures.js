@@ -30,6 +30,26 @@ const createHotel = async () => {
             hasSpa: false,
             asPool: false,
             priceCategory: 3,
+        },
+        {
+            name: "Hotel AntiBalle",
+            address: "2 rue des Baskets",
+            city: "Evreux",
+            country: "France",
+            stars: 1,
+            hasSpa: false,
+            asPool: false,
+            priceCategory: 2,
+        },
+        {
+            name: "Le Grecqouille",
+            address: "87 rue des Gaipieds",
+            city: "Paris",
+            country: "Saint-Maur",
+            stars: 5,
+            hasSpa: false,
+            asPool: false,
+            priceCategory: 3,
         }]).then((response) => {
             console.log(response);
         })
@@ -56,9 +76,28 @@ const createRestaurant = async () => {
             stars: 5,
             cuisine: "Asiatique",
             priceCategory: 4
-        }]).then((response) => {
-            console.log(response);
-        })
+        },
+        {
+            name: "Signature",
+            address: "2 rue des Abesses",
+            city: "Paris",
+            country: "France",
+            stars: 5,
+            cuisine: "Fusion franco-coréen",
+            priceCategory: 3
+        },
+        {
+            name: "Konexio FastFood",
+            address: "15 rue de la Réunion",
+            city: "Paris",
+            country: "France",
+            stars: 5,
+            cuisine: "Pas ouf",
+            priceCategory: 3
+        }
+    ]).then((response) => {
+        console.log(response);
+    })
 }
 createRestaurant();
 //
