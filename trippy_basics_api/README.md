@@ -13,4 +13,4 @@ Les différentes étapes et fonctionnalités :
 
 -------------------
 
-## Projet réalisé en trinome avec [@ElBessa](https://github.com/beresse) et [@bah918](https://github.com/bah918)
+ Projet réalisé en trinome avec [@ElBessa](https://github.com/beresse) et [@bah918](https://github.com/bah918)
