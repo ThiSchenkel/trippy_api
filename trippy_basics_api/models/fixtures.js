@@ -9,7 +9,7 @@ mongoose.connect("mongodb://localhost:27017/trippy_api", { useNewUrlParser: true
 //
 
 const createHotel = async () => {
-    await hotelModel.deleteMany({})
+    await hotelModel.deleteMany({}).exec(); // {} => filtre pour tout supprimer
     await hotelModel.create([
         {
             name: "Nice",
@@ -57,7 +57,7 @@ const createHotel = async () => {
 createHotel();
 
 const createRestaurant = async () => {
-    await restaurantModel.deleteMany({})
+    await restaurantModel.deleteMany({}).exec();
     await restaurantModel.create([
         {
             name: "Bouya's Restaurant",
@@ -75,14 +75,14 @@ const createRestaurant = async () => {
             country: "France",
             stars: 5,
             cuisine: "Asiatique",
-            priceCategory: 4
+            priceCategory: 1
         },
         {
             name: "Signature",
             address: "2 rue des Abesses",
             city: "Paris",
             country: "France",
-            stars: 5,
+            stars: 4,
             cuisine: "Fusion franco-coréen",
             priceCategory: 3
         },
@@ -91,7 +91,7 @@ const createRestaurant = async () => {
             address: "15 rue de la Réunion",
             city: "Paris",
             country: "France",
-            stars: 5,
+            stars: 2,
             cuisine: "Pas ouf",
             priceCategory: 3
         }
